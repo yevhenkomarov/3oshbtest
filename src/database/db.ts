@@ -1,6 +1,5 @@
 import mysql from 'mysql2/promise';
 
-// Create a connection pool
 export const pool = mysql.createPool({
   host: 'maglev.proxy.rlwy.net',
   user: 'root',
@@ -12,6 +11,5 @@ export const pool = mysql.createPool({
   queueLimit: 0
 });
 
-// Export the pool for use in other parts of the application
 export default pool;
 

@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div>
       <NewUserButton></NewUserButton>
-      <Button>IMPORT BUTTON</Button>
+      <Button variant="outline">IMPORT BUTTON</Button>
       <div>
         <PeopleTable></PeopleTable>
       </div>

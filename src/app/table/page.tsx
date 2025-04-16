@@ -1,5 +1,9 @@
+'use server'
+import DeleteUserButton from "@/components/deleteUserComponent";
+import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import db from "@/database/db";
+import pool from "@/database/db";
+
 
 type TestUser = {
     id: number,
@@ -9,10 +13,10 @@ type TestUser = {
 }
 
 export default async function PeopleTable() {
-    const response = await db.query('SELECT * FROM test_users ORDER BY id');
-    const testUsers = response[0] as TestUser[]
-    console.log(testUsers[0])
-    console.log(testUsers[0].created_at)
+    const response: Response = await fetch(`http://localhost:3000/api/users/`)
+    const jsonData = await response.json()
+    const testUsers = jsonData.data[0] as TestUser[]
+    console.log(jsonData.data[0])
     return (
         <Table className="p-1">
             <TableHeader>
@@ -30,7 +34,10 @@ export default async function PeopleTable() {
                             <TableCell className="font-medium">{user.id}</TableCell>
                             <TableCell className="font-medium">{user.name}</TableCell>
                             <TableCell className="font-medium">{user.email}</TableCell>
-                            <TableCell className="font-medium">{user.created_at.toISOString()}</TableCell>
+                            <TableCell className="font-medium">{user.created_at.toString()}</TableCell>
+                            <TableCell>
+                                <DeleteUserButton id={user.id} name={user.name}></DeleteUserButton>
+                            </TableCell>
                         </TableRow>
                     ))
                 }
