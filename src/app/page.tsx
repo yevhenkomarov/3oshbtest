@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
 import PeopleTable from "./table/page";
 import NewUserButton from "@/components/addUserComponent";
+import ImportButton from "@/components/importFromExelComponent";
 
 export default function Home() {
   return (
     <div>
       <NewUserButton></NewUserButton>
-      <Button variant="outline">IMPORT BUTTON</Button>
+      <ImportButton></ImportButton>
       <div>
         <PeopleTable></PeopleTable>
       </div>

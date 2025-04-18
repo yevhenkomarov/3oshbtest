@@ -6,6 +6,11 @@ import { Label } from "@radix-ui/react-label";
 import { useState } from "react";
 import { Input } from "./ui/input";
 import { editUserData } from "@/data/editUserAction";
+import { cn } from "@/lib/utils";
+import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
+import { CalendarIcon, Calendar } from "lucide-react";
+import { format } from "path";
+import { FormControl } from "./ui/form";
 
 function EditUserButton(person: PersonData) {
 
@@ -60,6 +65,26 @@ function EditUserButton(person: PersonData) {
               <Input id="created_at" className="col-span-3"
                 value={personData.created_at.toString()}
                 onChange={handleInputChange}/>
+                {/* <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "w-[240px] pl-3 text-left font-normal",
+                        !personData.created_at && "text-muted-foreground"
+                      )}
+                    >
+                        <span>Pick a date</span>
+                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                  />
+                </PopoverContent>
+              </Popover> */}
             </div>
           </div>
           <DialogFooter>
