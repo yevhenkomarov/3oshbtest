@@ -1,4 +1,4 @@
-import pool from "@/database/dbconnection";
+import pool from "@/database/localdb";
 import { NextResponse } from "next/server";
 
 type TestUser = {
@@ -32,12 +32,28 @@ export async function POST(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-    const {id, name} = await request.json()
+    const { id, name } = await request.json()
     console.log(name + ' removed')
     await pool.query(`delete from users where id=? and name=?`, [id, name])
     return NextResponse.json({
         success: true,
         data: `user with name: ${name} has been removed`
+    }, { status: 200 });
+}
+
+export async function PUT(request: Request) {
+    const json = await request.json()
+    const user = json as TestUser
+    console.log(json)
+    /*
+    update test_users.users
+set name = 'Комар Євгенов', email = 'ekomar@eko.mar'
+where id = 1744893825589;
+ */
+    await pool.query('UPDATE users SET name = ?, email = ?, created_at = ? WHERE id = ?', [user.name, user.email, user.created_at, user.id])
+    return NextResponse.json({
+        success: true,
+        data: user
     }, { status: 200 });
 }
 

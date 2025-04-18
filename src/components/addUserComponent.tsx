@@ -1,6 +1,5 @@
 'use client'
 
-import { PersonData } from "@/app/data/person"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -15,16 +14,15 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { DialogClose } from "@radix-ui/react-dialog"
 import { useState } from "react"
-
-
+import { addUserAction } from "@/data/addUserAction"
 
 function NewUserButton() {
 
   const [formData, setFormData] = useState({
-    id: '',
+    id: 0,
     name: '',
     email: '',
-    created_at: ''
+    created_at: new Date()
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,14 +47,6 @@ function NewUserButton() {
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="id" className="text-right">
-              ID
-            </Label>
-            <Input id="id" className="col-span-3"
-              value={formData.id}
-              onChange={handleInputChange} />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
               Name
             </Label>
@@ -77,24 +67,18 @@ function NewUserButton() {
               Created at
             </Label>
             <Input id="created_at" className="col-span-3"
-              value={formData.created_at}
+              value={formData.created_at.toString()}
               onChange={handleInputChange} />
           </div>
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button onClick={() => submitData(formData)} type="submit">Save changes</Button>
+            <Button onClick={() => addUserAction(formData)} type="submit">Save changes</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   )
 }
-
-async function submitData(data: PersonData) {
-  await fetch(`http://localhost:3000/api/users/`, { method: 'POST', body: JSON.stringify(data) })
-  console.log('submit ' + data);
-}
-
 
 export default NewUserButton
