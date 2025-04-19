@@ -63,7 +63,7 @@ function EditUserButton(person: PersonData) {
                 Created at
               </Label>
               <Input id="created_at" className="col-span-3"
-                value={personData.created_at.toString()}
+                value={new Date(person.created_at).toLocaleDateString()}
                 onChange={handleInputChange}/>
                 {/* <Popover>
                 <PopoverTrigger asChild>

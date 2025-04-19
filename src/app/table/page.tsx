@@ -16,7 +16,8 @@ export default async function PeopleTable() {
                     <TableHead className="w-[100px]">Id</TableHead>
                     <TableHead>Name</TableHead>
                     <TableHead>Email</TableHead>
-                    <TableHead className="text-right">Created at</TableHead>
+                    <TableHead className="text-left">Created at</TableHead>
+                    <TableHead className="text-left">Actions</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -26,11 +27,9 @@ export default async function PeopleTable() {
                             <TableCell className="font-medium">{user.id}</TableCell>
                             <TableCell className="font-medium">{user.name}</TableCell>
                             <TableCell className="font-medium">{user.email}</TableCell>
-                            <TableCell className="font-medium">{user.created_at.toString()}</TableCell>
+                            <TableCell className="font-medium">{new Date(user.created_at).toLocaleDateString()}</TableCell>
                             <TableCell>
                                 <EditUserButton id={user.id} name={user.name} email={user.email} created_at={user.created_at}></EditUserButton>
-                            </TableCell>
-                            <TableCell>
                                 <DeleteUserButton id={user.id} name={user.name}></DeleteUserButton>
                             </TableCell>
                         </TableRow>
