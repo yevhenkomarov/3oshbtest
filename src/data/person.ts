@@ -5,3 +5,11 @@ export interface PersonData {
     email: string;
     created_at: Date;
   }
+
+
+export interface ExcelUser {
+  ID: string,
+  Name: string,
+  Email: string,
+  'Created At': string
+}
