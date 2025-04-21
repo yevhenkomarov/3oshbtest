@@ -15,9 +15,9 @@ import { Label } from "@/components/ui/label"
 import { DialogClose } from "@radix-ui/react-dialog"
 import { useState } from "react"
 import { addUserAction } from "@/data/addUserAction"
+import DatePickerPopover from "./datePicker"
 
 function NewUserButton() {
-
   const [formData, setFormData] = useState({
     id: 0,
     name: '',
@@ -46,7 +46,7 @@ function NewUserButton() {
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
+          <div className="grid grid-cols-4 items-center padding-20">
             <Label htmlFor="name" className="text-right">
               Name
             </Label>
@@ -54,7 +54,7 @@ function NewUserButton() {
               value={formData.name}
               onChange={handleInputChange} />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
+          <div className="grid grid-cols-4 items-center padding-20">
             <Label htmlFor="email" className="text-right">
               Email
             </Label>
@@ -62,13 +62,14 @@ function NewUserButton() {
               value={formData.email}
               onChange={handleInputChange} />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
+          <div className="grid grid-cols-4 items-center padding-20">
             <Label htmlFor="createdAt" className="text-right">
               Created at
             </Label>
-            <Input id="created_at" className="col-span-3"
-              value={formData.created_at.toString()}
-              onChange={handleInputChange} />
+              <DatePickerPopover onDateChange={function (date: Date): void {
+                                          formData.created_at = date;
+                                          console.log(formData.created_at);
+                                      }} currentDate={formData.created_at}></DatePickerPopover>
           </div>
         </div>
         <DialogFooter>
