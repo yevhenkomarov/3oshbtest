@@ -1,4 +1,4 @@
-import PeopleTable from "./table/page";
+import PeopleTable from "../components/usersTableComponent";
 import NewUserButton from "@/components/addUserComponent";
 import ImportButton from "@/components/importFromExelComponent";
 

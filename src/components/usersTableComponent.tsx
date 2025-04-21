@@ -3,11 +3,11 @@ import DeleteUserButton from "@/components/deleteUserComponent";
 import EditUserButton from "@/components/editUserComponent";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { PersonData } from "@/data/person";
+import pool from "@/database/localdb";
 
 export default async function PeopleTable() {
-    const response: Response = await fetch(`http://localhost:3000/api/users/`)
-    const jsonData = await response.json()
-    const testUsers = jsonData.data[0] as PersonData[]
+    const users = await pool.query('SELECT * FROM users ORDER BY id');
+    const testUsers = users[0] as PersonData[]
     // console.log(jsonData.data[0])
     return (
         <Table className="p-1">
